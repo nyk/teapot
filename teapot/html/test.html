@@ -1,0 +1,23 @@
+<script src="http://cdnjs.cloudflare.com/ajax/libs/socket.io/0.6.2/socket.io.min.js"></script>
+<script>
+    var socket = io.connect('http://localhost');
+
+    socket.on('news', function(data) {
+      console.log(data);
+      socket.emit('my other event', { my: 'data' });
+    });
+    /*
+    socket.on('connection', function(socket) {
+      socket.send('getToken', function(token){
+        console.log("getToken called");
+        console.log(token);
+      });
+    });
+    */
+</script>
+<form name="InputForm" action="http://localhost/media" method="POST" enctype="multipart/form-data">
+    <p><input type=""text" name="username" size=""80""></p>
+    <p><input type="text" name="uid" size="80"></p>
+    <p><input type=file name="filename" size="80"></p>
+    <p><input type="submit" value="Upload File Test"></p>
+</form></p>
