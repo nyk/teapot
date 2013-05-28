@@ -1,8 +1,23 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.10/socket.io.min.js"></script>
 <script>
+$(document).ready(function() {
   var socket = io.connect('http://localhost');
-  socket.on('news', function (data) {
+
+  socket.on('connection', function (data) {
     console.log(data);
-    socket.emit('my other event', { my: 'data' });
   });
+
+  socket.on('collationAnnotated', function (data) {
+    console.log('COLL event received - name: ' + data.name);
+  });
+
+  $('input').bind('change', function() {
+    socket.emit("annotateCollation", { name: $(this).attr("name"), value: $(this).val() });
+  });
+
+});
 </script>
+<form method="post">
+  Story field 1: <input name="myfield" type="text" />
+</form>
